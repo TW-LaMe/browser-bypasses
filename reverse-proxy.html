@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reverse Proxy Demo (croxyproxy)</title>
+  <style>
+    .container { position:relative; width:900px; height:700px; }
+    .fit { width:1600px; height:1200px; transform:scale(0.56); transform-origin:top left; border:1px solid #444;}
+    button { position:absolute;top:10px;right:10px; }
+  </style>
+</head>
+<body>
+  <h2>Reverse Proxy (croxyproxy)</h2>
+  <div class="container">
+    <iframe id="proxyTest" src="https://www.croxyproxy.com/" class="fit"></iframe>
+    <button onclick="
+      var iframe = document.getElementById('proxyTest');
+      if (iframe.requestFullscreen) {iframe.requestFullscreen();}
+      else if (iframe.webkitRequestFullscreen) {iframe.webkitRequestFullscreen();}
+      else if (iframe.msRequestFullscreen) {iframe.msRequestFullscreen();}
+    ">Fullscreen</button>
+  </div>
+</body>
+</html>
