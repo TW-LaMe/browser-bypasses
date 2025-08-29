@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data URL iframe Demo</title>
+  <style>
+    .container { position:relative; width:400px; height:200px; }
+    button { position:absolute;top:10px;right:10px; }
+  </style>
+</head>
+<body>
+  <h2>Data URL (encoded HTML)</h2>
+  <div class="container">
+    <iframe id="dataTest" src="data:text/html;base64,PGgxPkhlbGxvLCBXb3JsZCE8L2gxPg==" width="800" height="600" style="transform:scale(0.5);transform-origin:top left;"></iframe>
+    <button onclick="
+      var iframe = document.getElementById('dataTest');
+      if (iframe.requestFullscreen) {iframe.requestFullscreen();}
+      else if (iframe.webkitRequestFullscreen) {iframe.webkitRequestFullscreen();}
+      else if (iframe.msRequestFullscreen) {iframe.msRequestFullscreen();}
+    ">Fullscreen</button>
+  </div>
+</body>
+</html>
