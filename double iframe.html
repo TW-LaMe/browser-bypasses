@@ -1,63 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>very real work </title>
+  <title>Multi-layered iframe embedding</title>
   <style>
-    html, body {
-      margin: 0;
-      height: 100%;
-      overflow: hidden;
-    }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
+    body { font-family:sans-serif; margin:2em; }
   </style>
 </head>
 <body>
-  <iframe allowfullscreen sandbox="allow-scripts allow-same-origin" srcdoc="
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <style>
-        html, body {
-          margin: 0;
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          background: #111;
-          color: white;
-          font-family: sans-serif;
-        }
-        iframe {
-          width: 80%;
-          height: 60%;
-          border: 2px solid #444;
-        }
-        button {
-          margin-top: 20px;
-          padding: 10px 20px;
-          font-size: 1em;
-          cursor: pointer;
-        }
-      </style>
-    </head>
-    <body>
-      <iframe id='inner' src='https://anura.pro' allowfullscreen></iframe>
-      <button onclick='window.parent.postMessage(\"request-fullscreen\", \"*\")'>Go Fullscreen</button>
-    </body>
-    </html>
-  "></iframe>
-
-  <script>
-    window.addEventListener("message", (e) => {
-      if (e.data === "request-fullscreen") {
-        document.documentElement.requestFullscreen();
-      }
-    });
-  </script>
+  <h2>Multi-layered iframe embedding</h2>
+  <iframe srcdoc='
+    <iframe srcdoc="
+      <iframe id=\"multiIframe\" src=&quot;https://anura.pro&quot; style=\"width:1600px;height:1200px;transform:scale(0.7);transform-origin:top left;border:1px solid #444;\"></iframe>
+      <button onclick=\"
+        var iframe = document.getElementById(&apos;multiIframe&apos;);
+        if (iframe.requestFullscreen) {iframe.requestFullscreen();}
+        else if (iframe.webkitRequestFullscreen) {iframe.webkitRequestFullscreen();}
+        else if (iframe.msRequestFullscreen) {iframe.msRequestFullscreen();}
+      \">Fullscreen</button>
+    " width="1120" height="840"></iframe>
+  ' width="1150" height="870"></iframe>
 </body>
 </html>
