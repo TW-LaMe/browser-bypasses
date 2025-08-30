@@ -1,4 +1,26 @@
 <!DOCTYPE html>
+<html>
+<head>
+  <title>Multi-layered iframe embedding</title>
+  <style>
+    body { font-family:sans-serif; margin:2em; }
+  </style>
+</head>
+<body>
+  <h2>Multi-layered iframe embedding</h2>
+  <iframe srcdoc='
+    <iframe srcdoc="
+      <iframe id=\"multiIframe\" src=&quot;https://anura.pro&quot; style=\"width:1600px;height:1200px;transform:scale(0.7);transform-origin:top left;border:1px solid #444;\"></iframe>
+      <button onclick=\"
+        var iframe = document.getElementById(&apos;multiIframe&apos;);
+        if (iframe.requestFullscreen) {iframe.requestFullscreen();}
+        else if (iframe.webkitRequestFullscreen) {iframe.webkitRequestFullscreen();}
+        else if (iframe.msRequestFullscreen) {iframe.msRequestFullscreen();}
+      \">Fullscreen</button>
+    " width="1120" height="840"></iframe>
+  ' width="1150" height="870"></iframe>
+</body>
+</html><!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
