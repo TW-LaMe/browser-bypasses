@@ -1,159 +1,113 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>bypass test</title>
-  
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
-
-<html>
-
-<head>
-
-  <title>TN links are ass</title>
-
+  <title>TN Link Bypass</title>
   <style>
-
-    body { font-family: sans-serif; text-align: center; margin-top: 40px; }
-
-    #outerIframe { width: 95vw; height: 70vh; border: 1px solid #888; margin-top: 20px; }
-
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 40px;
+    }
+    #outerIframe {
+      width: 95vw;
+      height: 70vh;
+      border: 1px solid #888;
+      margin-top: 20px;
+    }
+    #urlInput {
+      width: 60%;
+      padding: 10px;
+      font-size: 1em;
+    }
+    #loadBtn {
+      padding: 10px 20px;
+      font-size: 1em;
+      margin-left: 10px;
+    }
   </style>
-
 </head>
-
 <body>
 
-  <h2>TN links are ass, so I made this which i easy to deploy, easy to setup, and is skid friendly (cough cough, NebuLord using ai and saying that "he" made it.)</h2>
+  <h2>TN links are ass, so I made this easy to deploy, easy to setup, and skid friendly</h2>
 
-  <iframe id="outerIframe" srcdoc='
+  <input type="text" id="urlInput" placeholder="Enter URL (e.g. https://anura.pro)">
+  <button id="loadBtn">Load URL</button>
 
-    <!DOCTYPE html>
+  <iframe id="outerIframe"></iframe>
 
-    <html>
+  <script>
+    const outerIframe = document.getElementById("outerIframe");
+    const loadBtn = document.getElementById("loadBtn");
 
-      <head>
+    loadBtn.onclick = () => {
+      const url = document.getElementById("urlInput").value.trim();
+      if (!url) return;
 
-        <style>
+      const srcdocContent = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <style>
+              #container {
+                width: 100vw;
+                height: 60vh;
+                position: relative;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #eee;
+              }
+              #innerIframe {
+                border: 1px solid #444;
+                position: absolute;
+                left: 0; top: 0;
+                width: 1600px;
+                height: 1200px;
+                transform-origin: top left;
+                background: #fff;
+              }
+              #fullscreenBtn {
+                margin: 20px; font-size: 1.1em; padding: 10px 24px;
+              }
+            </style>
+          </head>
+          <body style="margin:0; text-align:center;">
+            <button id="fullscreenBtn">Fullscreen Inner Iframe</button>
+            <div id="container">
+              <iframe id="innerIframe" src="${url}"></iframe>
+            </div>
+            <script>
+              function autoFit() {
+                var cont = document.getElementById("container");
+                var iframe = document.getElementById("innerIframe");
+                var scaleX = cont.offsetWidth / 1600;
+                var scaleY = cont.offsetHeight / 1200;
+                var scale = Math.min(scaleX, scaleY);
+                iframe.style.transform = "scale(" + scale + ")";
+              }
+              window.addEventListener("resize", autoFit);
+              window.addEventListener("DOMContentLoaded", autoFit);
+              autoFit();
+              document.getElementById("fullscreenBtn").onclick = function() {
+                var iframe = document.getElementById("innerIframe");
+                if (iframe.requestFullscreen) {
+                  iframe.requestFullscreen();
+                } else if (iframe.webkitRequestFullscreen) {
+                  iframe.webkitRequestFullscreen();
+                } else if (iframe.msRequestFullscreen) {
+                  iframe.msRequestFullscreen();
+                }
+              };
+            </script>
+          </body>
+        </html>
+      `;
 
-          #container {
+      outerIframe.srcdoc = srcdocContent;
+    };
+  </script>
 
-            width: 100vw;
-
-            height: 60vh;
-
-            position: relative;
-
-            overflow: hidden;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            background: #eee;
-
-          }
-
-          #innerIframe {
-
-            border: 1px solid #444;
-
-            position: absolute;
-
-            left: 0; top: 0;
-
-            width: 1600px;
-
-            height: 1200px;
-
-            transform-origin: top left;
-
-            background: #fff;
-
-          }
-
-          #fullscreenBtn {
-
-            margin: 20px; font-size: 1.1em; padding: 10px 24px;
-
-          }
-
-        </style>
-
-      </head>
-
-      <body style="margin:0; text-align:center;">
-
-        <button id="fullscreenBtn">Fullscreen Inner Iframe</button>
-
-        <div id="container">
-
-          <iframe id="innerIframe" src="https://anura.pro"></iframe> 
-
-        </div>
-
-        <script>
-
-          function autoFit() {
-
-            var cont = document.getElementById("container");
-
-            var iframe = document.getElementById("innerIframe");
-
-            var scaleX = cont.offsetWidth / 1600;
-
-            var scaleY = cont.offsetHeight / 1200;
-
-            var scale = Math.min(scaleX, scaleY);
-
-            iframe.style.transform = "scale(" + scale + ")";
-
-          }
-
-          window.addEventListener("resize", autoFit);
-
-          window.addEventListener("DOMContentLoaded", autoFit);
-
-          autoFit();
-
-          document.getElementById("fullscreenBtn").onclick = function() {
-
-            var iframe = document.getElementById("innerIframe");
-
-            if (iframe.requestFullscreen) {
-
-              iframe.requestFullscreen();
-
-            } else if (iframe.webkitRequestFullscreen) {
-
-              iframe.webkitRequestFullscreen();
-
-            } else if (iframe.msRequestFullscreen) {
-
-              iframe.msRequestFullscreen();
-
-            }
-
-          };
-
-        </script>
-
-      </body>
-
-    </html>
-
-  ' width="95vw" height="70vh"></iframe>
-
-</body>
-
-</html>
-<!-- partial -->
-  
 </body>
 </html>
