@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML to Base64 Data URL Generator</title>
+  <style>
+    body { font-family: sans-serif; margin: 2em; background: #f8f8f8; }
+    textarea { width: 100%; height: 120px; font-family: monospace; font-size:1em; }
+    input, .output { width: 100%; font-size: 1em; margin-top: 1em;}
+    label { font-weight: bold; margin-top: 1em; display: block;}
+    .desc { color: #555; margin-bottom: 1em; }
+    .dataurl { word-break: break-all; background: #eee; padding:0.5em; }
+  </style>
+</head>
+<body>
+  <h2>HTML to Base64 Data URL Generator</h2>
+  <div class="desc">
+    Enter any HTML snippet below and get its base64 encoding for use in <code>data:text/html;base64,...</code> URLs.
+    <br>Copy the result for use in <code>&lt;iframe src="data:text/html;base64,..."&gt;</code> or similar.
+  </div>
+  <label for="htmlInput">HTML snippet:</label>
+  <textarea id="htmlInput" placeholder="Type or paste your HTML here...">&lt;h1&gt;Hello, World!&lt;/h1&gt;</textarea>
+
+  <label for="base64Output">Base64 encoding:</label>
+  <input id="base64Output" readonly>
+
+  <label>Full data URL:</label>
+  <div class="dataurl" id="dataUrlOutput"></div>
+
+  <script>
+    function htmlToBase64(html) {
+      return btoa(unescape(encodeURIComponent(html)));
+    }
+    function updateOutput() {
+      const html = document.getElementById('htmlInput').value;
+      const base64 = htmlToBase64(html);
+      document.getElementById('base64Output').value = base64;
+      document.getElementById('dataUrlOutput').textContent = "data:text/html;base64," + base64;
+    }
+    document.getElementById('htmlInput').addEventListener('input', updateOutput);
+    window.onload = updateOutput;
+  </script>
+</body>
+</html>
