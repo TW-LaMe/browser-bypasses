@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Double Iframe Bypass</title>
+  <title>very real work</title>
   <style>
-    body { margin: 0; padding: 0; }
+    body { margin: 0; padding: 0; font-family: sans-serif; }
     #controls {
       position: fixed;
       top: 0;
@@ -14,10 +14,23 @@
       padding: 10px;
       z-index: 9999;
     }
+    #controls input, #controls button {
+      margin-right: 10px;
+    }
     iframe {
       border: none;
       width: 100%;
-      height: calc(100vh - 50px);
+      height: calc(100vh - 60px);
+    }
+    #history {
+      margin-top: 5px;
+      font-size: 0.9em;
+    }
+    #history a {
+      color: #00ffff;
+      margin-right: 10px;
+      text-decoration: underline;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -25,25 +38,54 @@
   <div id="controls">
     <input type="text" id="siteUrl" placeholder="Enter site URL (e.g. https://example.com)" size="50">
     <button onclick="loadSite()">Go</button>
+    <button onclick="goFullscreen()">Fullscreen</button>
+    <div id="history"></div>
   </div>
 
-  <iframe id="outerFrame">
-    <html>
-      <body>
-        <iframe id="innerFrame" src=""></iframe>
-      </body>
-    </html>
-  </iframe>
+  <iframe id="outerFrame"></iframe>
 
   <script>
+    const historyList = [];
+
     function loadSite() {
       const url = document.getElementById('siteUrl').value;
-      const outerFrame = document.getElementById('outerFrame');
+      if (!url) return;
 
-      // Create a nested iframe structure dynamically
-      outerFrame.srcdoc = `
+      // Update iframe with nested iframe
+      document.getElementById('outerFrame').srcdoc = `
         <iframe src="${url}" style="width:100%; height:100%; border:none;"></iframe>
       `;
+
+      // Add to history- erm i mean very real work log
+      if (!historyList.includes(url)) {
+        historyList.push(url);
+        updateHistory();
+      }
+    }
+
+    function updateHistory() {
+      const historyDiv = document.getElementById('history');
+      historyDiv.innerHTML = 'History: ';
+      historyList.forEach(url => {
+        const link = document.createElement('a');
+        link.textContent = url;
+        link.onclick = () => {
+          document.getElementById('siteUrl').value = url;
+          loadSite();
+        };
+        historyDiv.appendChild(link);
+      });
+    }
+
+    function goFullscreen() {
+      const iframe = document.getElementById('outerFrame');
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
+      }
     }
   </script>
 </body>
