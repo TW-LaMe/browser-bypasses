@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Browser Bypass Methods Demo Gallery</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body { font-family: sans-serif; background: #f7f7fa; margin: 0; padding: 0 0 4em 0; }
+    main { max-width: 800px; margin: 2em auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 12px #0002; padding: 2em; }
+    h1 { font-size: 2em; margin-bottom: 0.2em; }
+    h2 { margin-top: 2em; font-size: 1.2em; }
+    .desc { color: #444; margin-bottom: 1em; }
+    ul { padding-left: 1.4em; }
+    li { margin-bottom: 1.2em; }
+    a.demo-link { display: inline-block; margin-top: 0.4em; padding: 0.4em 1em; background: #e5e9f7; border-radius: 5px; text-decoration: none; color: #2a3c7e; font-weight: bold; transition: background .15s; }
+    a.demo-link:hover { background: #cfd9f7; }
+    footer { text-align: center; color: #666; font-size: 0.92em; margin-top: 3em; }
+    code { background: #eee; padding: 2px 5px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Browser Bypass Methods</h1>
+  <div class="desc">
+    This repo demonstrates common methods for bypassing browser-based content filters and restrictions. Each link below opens a standalone demo.
+    <br><br>
+    <strong>Warning:</strong> Some demos may be blocked by network or server settings. Use for educational/testing purposes only!
+  </div>
+
+  <h2>Demos</h2>
+  <ul>
+    <li>
+      <strong>Data URL (encoded HTML)</strong><br>
+      Embeds HTML using a <code>data:text/html;base64,...</code> URL.
+      <br><a class="demo-link" href="data-url.html" target="_blank">Open Demo</a>
+    </li>
+    <li>
+      <strong>Double Iframe Embedding</strong><br>
+      Nests two iframes for testing filter depth or sandboxing.
+      <br><a class="demo-link" href="double iframe.html" target="_blank">Open Demo</a>
+    </li>
+    <li>
+      <strong>Framely (X-Frame-Options Bypass)</strong><br>
+      Uses a third-party service to embed sites that block iframes.
+      <br><a class="demo-link" href="framely.html" target="_blank">Open Demo</a>
+    </li>
+    <li>
+      <strong>HTML to Base64 Data URL Generator</strong><br>
+      Quickly convert any HTML snippet to a base64-encoded string usable in <code>data:text/html;base64,...</code> URLs.
+      <br><a class="demo-link" href="htmltobaseEncoder.html" target="_blank">Open Tool</a>
+    </li>
+    <li>
+      <strong>JavaScript <code>window.open()</code></strong><br>
+      Opens a site in a new tab/window via JavaScript.
+      <br><a class="demo-link" href="javascript-newWindow.html" target="_blank">Open Demo</a>
+    </li>
+    <li>
+      <strong>Meta Refresh Redirect</strong><br>
+      Instantly redirects to a target site using a <code>&lt;meta&gt;</code> tag.
+      <br><a class="demo-link" href="meta-refresh.html" target="_blank">Open Demo</a>
+    </li>
+    <li>
+      <strong>Object &amp; Embed tags</strong><br>
+      Uses <code>&lt;object&gt;</code> and <code>&lt;embed&gt;</code> elements instead of <code>&lt;iframe&gt;</code>.
+      <br><a class="demo-link" href="object-embed.html" target="_blank">Open Demo</a>
+    </li>
+    <li>
+      <strong>Reverse Proxy (croxyproxy)</strong><br>
+      Accesses remote sites via a public proxy to evade network blocks.
+      <br><a class="demo-link" href="reverse-proxy.html" target="_blank">Open Demo</a>
+    </li>
+    <li>
+      <strong>SVG with <code>&lt;foreignObject&gt;</code></strong><br>
+      Embeds HTML (including iframes) inside an SVG canvas.
+      <br><a class="demo-link" href="svg-foreignObject.html" target="_blank">Open Demo</a>
+    </li>
+  </ul>
+
+  <footer>
+    &copy; 2025 <a href="https://github.com/TW-LaMe/browser-bypasses" target="_blank">TW-LaMe/browser-bypasses</a> &mdash; Educational Use Only
+  </footer>
+</main>
+</body>
+</html>
