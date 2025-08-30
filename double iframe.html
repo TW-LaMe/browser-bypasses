@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>TN Link Bypass</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modular Iframe Loader</title>
   <style>
     body {
       font-family: sans-serif;
-      text-align: center;
-      margin-top: 40px;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f5;
     }
-    #outerIframe {
-      width: 95vw;
-      height: 70vh;
-      border: 1px solid #888;
-      margin-top: 20px;
+    #controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
     }
-    #urlInput {
-      width: 60%;
+    input[type="text"] {
+      flex: 1;
       padding: 10px;
       font-size: 1em;
     }
-    #loadBtn {
+    button {
       padding: 10px 20px;
       font-size: 1em;
-      margin-left: 10px;
+      cursor: pointer;
+    }
+    #outerIframe {
+      width: 100%;
+      height: 70vh;
+      border: 2px solid #333;
     }
   </style>
 </head>
 <body>
-
-  <h2>TN links are ass, so I made this easy to deploy, easy to setup, and skid friendly</h2>
-
-  <input type="text" id="urlInput" placeholder="Enter URL (e.g. https://anura.pro)">
-  <button id="loadBtn">Load URL</button>
-
+  <h1>Modular Iframe Loader</h1>
+  <div id="controls">
+    <input type="text" id="urlInput" placeholder="Enter URL to load inside inner iframe..." />
+    <button id="loadBtn">Load URL</button>
+  </div>
   <iframe id="outerIframe"></iframe>
 
   <script>
     const outerIframe = document.getElementById("outerIframe");
     const loadBtn = document.getElementById("loadBtn");
+    const urlInput = document.getElementById("urlInput");
 
-    loadBtn.onclick = () => {
-      const url = document.getElementById("urlInput").value.trim();
+    function loadURL() {
+      const url = urlInput.value.trim();
       if (!url) return;
 
       const srcdocContent = `
@@ -49,6 +55,11 @@
         <html>
           <head>
             <style>
+              body {
+                margin: 0;
+                text-align: center;
+                background: #eee;
+              }
               #container {
                 width: 100vw;
                 height: 60vh;
@@ -57,7 +68,6 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background: #eee;
               }
               #innerIframe {
                 border: 1px solid #444;
@@ -69,11 +79,13 @@
                 background: #fff;
               }
               #fullscreenBtn {
-                margin: 20px; font-size: 1.1em; padding: 10px 24px;
+                margin: 20px;
+                font-size: 1.1em;
+                padding: 10px 24px;
               }
             </style>
           </head>
-          <body style="margin:0; text-align:center;">
+          <body>
             <button id="fullscreenBtn">Fullscreen Inner Iframe</button>
             <div id="container">
               <iframe id="innerIframe" src="${url}"></iframe>
@@ -106,8 +118,16 @@
       `;
 
       outerIframe.srcdoc = srcdocContent;
-    };
-  </script>
+    }
 
+    loadBtn.onclick = loadURL;
+
+    urlInput.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        loadURL();
+      }
+    });
+  </script>
 </body>
 </html>
