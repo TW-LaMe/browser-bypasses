@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GitHub mobile sucks</title>
+  <style>
+    body { font-family:sans-serif; margin:2em; }
+    .container { position:relative; width:900px; height:700px; }
+    .fit { width:1600px; height:1200px; transform:scale(0.56); transform-origin:top left; border:1px solid #444;}
+    button { position:absolute;top:10px;right:10px; }
+  </style>
+</head>
+<body>
+  <h2>Embed tag</h2>
+  <div class="container" style="margin-top:2em;">
+    <embed id="embedTest" src="https://anura.pro" class="fit"></embed>
+    <button onclick="
+      var embed = document.getElementById('embedTest');
+      if (embed.requestFullscreen) {embed.requestFullscreen();}
+      else if (embed.webkitRequestFullscreen) {embed.webkitRequestFullscreen();}
+      else if (embed.msRequestFullscreen) {embed.msRequestFullscreen();}
+    ">Fullscreen</button>
+  </div>
+</body>
+</html>
